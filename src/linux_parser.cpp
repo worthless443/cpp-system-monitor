@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <iostream>
 
 #include "linux_parser.h"
 
@@ -81,16 +82,14 @@ vector<int> LinuxParser::Pids() {
   vector<int> pids;
   DIR* directory = opendir(kProcDirectory.c_str());
   struct dirent* file;
-  while ((file = readdir(directory)) != nullptr) {
-    // Is this a directory?
-    if (file->d_type == DT_DIR) {
-      // Is every character of the name a digit?
-      string filename(file->d_name);
-      if (std::all_of(filename.begin(), filename.end(), isdigit)) {
-        int pid = stoi(filename);
-        pids.push_back(pid);
-      }
-    }
+  while(*(int*)directory != 0) {
+	  if ((file = readdir(directory))==NULL) break;
+	  if(file->d_type == DT_DIR) {
+	  	string fname{file->d_name};
+		int pid = (std::all_of(fname.begin(), fname.end(), isdigit)) ? std::__cxx11::stoi(fname) : 0;
+		pids.push_back(pid);
+	  
+	  }
   }
   closedir(directory);
   return pids;
