@@ -1,0 +1,3 @@
+/home/aissy/Documents/c_cpp/cpp-system-monitor/CMakeFiles/rebuild_cache.dir
+/home/aissy/Documents/c_cpp/cpp-system-monitor/CMakeFiles/edit_cache.dir
+/home/aissy/Documents/c_cpp/cpp-system-monitor/CMakeFiles/monitor.dir
